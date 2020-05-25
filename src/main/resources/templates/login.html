@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="">
+		<meta name="author" content="鲁俊逸，邓蕾，刘昱中">
+		<title>作业管理系统——登录</title>
+		<!-- Bootstrap core CSS -->
+		<link href="../static/asserts/css/bootstrap.min.css" rel="stylesheet">
+		<!-- Custom styles for this template -->
+		<link href="../static/asserts/css/signin.css" rel="stylesheet">
+
+	</head>
+
+	<body class="text-center">
+		<form class="form-signin"  th:action="@{/login}" method="post">
+			<img class="mb-4" src="../static/asserts/img/buaa.jpg" alt="" width="200" height="200" align="middle">
+			<h1 class="h3 mb-3 font-weight-normal">北航作业管理系统</h1>
+			<p style="color:green" th:text="${pass}" th:if="${not #strings.isEmpty(pass)}"></p>
+			<p style="color:red" th:text="${err}" th:if="${not #strings.isEmpty(err)}"></p>
+			<label class="sr-only">用户名</label>
+			<input type="text" class="form-control" name="username" placeholder="Username"  autofocus="">
+			<label class="sr-only">密码</label>
+			<input type="password" class="form-control" name="password" placeholder="Password">
+
+			<br/><br/>
+			<button class="btn btn-lg btn-primary btn-block" type="submit" value="login" name="action">登录</button>
+			<button class="btn btn-lg btn-primary btn-block" type="submit" value="register" name="action">注册</button>
+			<p class="mt-5 mb-3 text-muted">©作者：鲁俊逸，邓蕾，刘昱中</p>
+		</form>
+
+	</body>
+
+</html>

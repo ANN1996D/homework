@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>北航作业管理系统——学生</title>
+    <!-- Bootstrap core CSS -->
+    <link href="../static/asserts/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../static/asserts/css/dashboard.css" rel="stylesheet">
+	<script src="../static/asserts/js/jquery-3.2.1.slim.min.js"></script>
+	<script src="../static/asserts/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+        <a style="color: #9fcdff" class="navbar-brand col-sm-3 col-md-2 mr-0 mark" th:text="'你好，'+${name}+'同学~'" >hello</a>
+        <ul class="navbar-nav px-5">
+            <li class="nav-item text-nowrap ">
+                <a class="nav-link" href="http://localhost:8080/">注销</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <br /><br /><br />
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column col-sm-10" >
+                        <li class="nav-item">
+                            <form  th:action="@{/student/view_info}"  method="post">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                </svg>
+                                <input class="" type="hidden" th:name="id" th:value="${id}">
+                                <button class="btn btn-default btn-outline-secondary" type='submit' >基本信息</button>
+                            </form>
+                        </li>
+                        <li class="nav-item"><br /><br /></li>
+                        <li class="nav-item">
+                            <form  th:action="@{/student/view_course}"  method="post">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file">
+                                    <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                                    <polyline points="2 17 12 22 22 17"></polyline>
+                                    <polyline points="2 12 12 17 22 12"></polyline>
+                                </svg>
+                                <input class="" type="hidden" th:name="id" th:value="${id}">
+                                <button class="btn btn-default btn-outline-secondary" type='submit' >课程</button>
+                            </form>
+                        </li>
+                        <li class="nav-item"><br /><br /></li>
+                        <li class="nav-item">
+                            <form  th:action="@{/student/view_homework}"  method="post">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                    <polyline points="14 2 14 8 20 8"></polyline>
+                                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                                    <polyline points="10 9 9 9 8 9"></polyline>
+                                </svg>
+                                <button class="btn btn-default btn-outline-secondary" type='submit' >作业</button>
+                                <input class="" type="hidden" th:name="id" th:value="${id}">
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4" th:if="${#strings.equals(option,'view_info')}">
+                <div class=" justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+                    <h1 class="h2">基本信息</h1>
+                    <br /><br /><br />
+    <!--                <button class="btn btn-sm btn-outline-secondary">修改信息</button>-->
+                    <table class="table table-bordered table-hover table-condensed table-row">
+                        <tr bgcolor="#d3d3d3" style="vertical-align: middle !important;text-align: center;">
+                            <td>姓名</td>
+                            <td>性别</td>
+                            <td>身份</td>
+                            <td>联系电话</td>
+                            <td>邮箱</td>
+                        </tr>
+                        <tr style="vertical-align: middle !important;text-align: center;">
+                            <td th:text="${basic_info.getName()}"></td>
+                            <td th:text="${basic_info.isSex()?'男':'女'}"></td>
+                            <td th:text="${basic_info.isRole()?'学生':'教师'}"></td>
+                            <td th:text="${basic_info.getPhone()}"></td>
+                            <td th:text="${basic_info.getEmail()}"></td>
+                        </tr>
+                    </table>
+                </div>
+            </main>
+
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4" th:if="${#strings.equals(option,'view_course')}">
+                <div class=" justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+                    <h2 class="h2">课程信息</h2>
+                    <br /><br /><br />
+                    <h3 style="color: red" th:if="${#lists.isEmpty(courses)}">老师还没开设课程</h3>
+                    <table class="table table-bordered table-hover table-condensed" th:if="${not #lists.isEmpty(courses)}">
+                        <tr bgcolor="#d3d3d3"  style="vertical-align: middle !important;text-align: center;">
+                            <td >课程名</td>
+                            <td>教师名</td>
+                            <td>已选</td>
+                            <td>操作</td>
+                        </tr>
+                        <tr style="vertical-align: middle !important;text-align: center;" th:each="course : ${courses}">
+                            <td th:text="${course.getName()}"></td>
+                            <td th:text="${course.getTeacher().name}"></td>
+                            <td th:text="${#lists.contains(choose_list,course.getId())?'是':'否'}"></td>
+                            <td>
+                                <div th:if="${not #lists.contains(choose_list,course.getId())}">
+                                    <form th:action="@{/student/choose}"  method='post' th:if="${course.getCapacity()>course.getNumStudent()}">
+                                        <input type="hidden"  name="id" th:value="${id}">
+                                        <button class="btn btn-info" type="submit" name="course_id" th:value="${course.getId()}">选课</button>
+                                    </form>
+                                    <label th:if="${course.getCapacity()<=course.getNumStudent()}">课程人数已满</label>
+                                </div>
+                                <form th:action="@{/student/quit}" th:if="${#lists.contains(choose_list,course.getId())}" method='post' >
+                                    <input type="hidden"  name="id" th:value="${id}">
+                                    <button class="btn btn-warning" type="submit" name="course_id" th:value="${course.getId()}">撤课</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </main>
+
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4" th:if="${#strings.equals(option,'view_homework')}">
+                <div class=" justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+                    <h1 class="h2">作业信息</h1>
+                    <br /><br /><br />
+                    <table class="table table-bordered table-hover table-condensed" th:if="${not #lists.isEmpty(homeworks)}">
+                        <tr bgcolor="#d3d3d3"  style="vertical-align: middle !important;text-align: center;">
+                            <td>课程名</td>
+                            <td>作业名</td>
+                            <td>详细描述</td>
+                            <td>示例</td>
+                            <td>操作</td>
+                            <td>是否已提交</td>
+                            <td>是否已批改</td>
+                            <td>分数</td>
+                        </tr>
+                        <tr style="vertical-align: middle !important;text-align: center;" th:each="hw : ${homeworks}">
+                            <td th:text="${hw.getCourse().name}"></td>
+                            <td th:text="${hw.getName()}"></td>
+                            <td th:text="${hw.getDescription()}"></td>
+                            <td>
+                                <form th:action="@{/file/download}" method='post' enctype='multipart/form-data'>
+                                    <input type="hidden"  name="filename" th:value="${hw.getDemo_path()}">
+                                    <button type='submit' class="btn btn-info">下载</button>
+                                </form>
+                            </td>
+                            <td>
+                                <form th:action="@{/student/submit}" method='post' enctype='multipart/form-data'>
+                                    <input type="hidden"  name="id" th:value="${id}">
+                                    <input type="hidden"  name="homework_id" th:value="${hw.getId()}">
+                                    <input type='file' name='file'>
+                                    <button type='submit' name="path" value="/homework/">提交</button>
+                                </form>
+                            </td>
+                            <td th:each="detail : ${hw.getDetails()}" th:if="${detail.getStudent().id==id}" th:text="${detail.isFlag_submit()?'是':'否'}"></td>
+                            <td th:each="detail : ${hw.getDetails()}" th:if="${detail.getStudent().id==id}" th:text="${detail.isFlag_judge()?'是':'否'}"></td>
+                            <td th:each="detail : ${hw.getDetails()}" th:if="${detail.getStudent().id==id}" th:text="${detail.isFlag_judge()?detail.getScore():'-'}"></td>
+                        </tr>
+
+                    </table>
+                </div>
+            </main>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
